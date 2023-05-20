@@ -1,5 +1,5 @@
-- name: configure roboshop project
-  hosts: all
-  become: yes
+- name: builtin roboshop project
+  hosts: frontend
   roles:
     - frontend
+    
