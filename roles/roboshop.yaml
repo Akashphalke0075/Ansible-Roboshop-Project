@@ -1,5 +1,5 @@
 - name: builtin roboshop project
   hosts: frontend
+  become: yes
   roles:
     - frontend
-    
