@@ -3,11 +3,16 @@
     name: nginx
     state: present
 
-- name: dwonload and extract
-  ansible.builtin.unarchive:
-    src: https://github.com/stans-robot-project/frontend/archive/main.zip
-    dest: /tmp
-    remote_src: yes    
+# - name: dwonload and extract
+#   ansible.builtin.unarchive:
+#     src: https://github.com/stans-robot-project/frontend/archive/main.zip
+#     dest: /tmp
+#     remote_src: yes    
+
+- name: Run tasks other download and extract frontend
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download
 
 - name: Remove file 
   ansible.builtin.file:
