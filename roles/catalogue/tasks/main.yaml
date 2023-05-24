@@ -7,3 +7,27 @@
        - nodejs
        - gcc-c++
     state: present
+
+
+- name: Add the user roboshop
+  ansible.builtin.user:
+    name: roboshop
+    comment: adding user for project roboshop
+
+- name: Run tasks other download and extract frontend
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download    
+
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /home/roboshop/{{COMPONENT}}
+    state: absent    
+
+- name: Copy a file
+  ansible.builtin.copy:
+    src: /home/roboshop/tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+  become_user: roboshop 
+
