@@ -31,3 +31,21 @@
     remote_src: yes
   become_user: roboshop 
 
+- name: Install npm package
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+
+
+- name: Copy a systemd file
+  ansible.builtin.copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restart service nginx
+  ansible.builtin.service:
+    name: "{{COMPONENT}}"
+    state: restarted 
+    daemon_reload: true
+    enabled: yes
+       
+  
