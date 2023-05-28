@@ -12,3 +12,6 @@ redis.robot.internal
 
 [user]
 user.robot.internal
+
+[cart]
+cart.robot.internal
