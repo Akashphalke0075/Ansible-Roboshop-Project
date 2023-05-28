@@ -1,0 +1,54 @@
+- name: configure yum repo
+  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
+
+- name: installing nodejs
+  ansible.builtin.yum: 
+    name:
+       - nodejs
+       - gcc-c++
+    state: present
+
+
+- name: Add the user roboshop
+  ansible.builtin.user:
+    name: roboshop
+    comment: adding user for project roboshop
+
+- name: Run tasks other download and extract frontend
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download    
+
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /home/roboshop/{{COMPONENT}}
+    state: absent    
+
+- name: Copy a file
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+  become_user: roboshop 
+
+- name: Install npm package
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+
+
+- name: Copy a systemd file
+  ansible.builtin.copy:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+
+- name: Restart service nginx
+  ansible.builtin.service:
+    name: "{{COMPONENT}}"
+    state: restarted 
+    daemon_reload: true
+    enabled: yes
+       
+- name: Run tasks other download and extract mongo
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
