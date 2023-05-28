@@ -48,5 +48,7 @@
     daemon_reload: true
     enabled: yes
        
-- name: set host name
-  ansible.builtin.shell: set-hostname {{COMPONENT}}
+- name: Run tasks other download and extract mongo
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
