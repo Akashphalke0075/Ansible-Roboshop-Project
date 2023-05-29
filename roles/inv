@@ -17,4 +17,4 @@ user.robot.internal
 cart.robot.internal
 
 [mysql]
-mysql.robot.internal
+172.31.28.79
