@@ -45,7 +45,7 @@
   ignore_errors: yes
 
 - name: uninstalled password validate plugin
-  # when: PLUGIN_INFO.rc == 0
+  when: PLUGIN_INFO.rc == 0
   block: 
       - name: copyning password validate command
         ansible.builtin.copy:
