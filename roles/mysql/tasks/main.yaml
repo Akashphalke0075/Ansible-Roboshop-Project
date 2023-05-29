@@ -62,7 +62,7 @@
 
 - name: load schema
   community.mysql.mysql_db:
-    state: dump
+    state: import
     name: all
     target: /tmp/mysql-main/shipping.mysql
     login_user: root
