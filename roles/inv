@@ -18,3 +18,6 @@ cart.robot.internal
 
 [mysql]
 172.31.28.79
+
+[shipping]
+172.31.83.172

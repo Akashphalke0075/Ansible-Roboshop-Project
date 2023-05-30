@@ -1,0 +1,46 @@
+- name: installing maven
+  ansible.builtin.yum: 
+    name: maven
+    state: present
+
+- name: creating user 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: create-user.yaml 
+
+- name: Run tasks other download and extract frontend
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: download    
+
+
+- name: Remove file (delete file)
+  ansible.builtin.file:
+    path: /home/roboshop/{{COMPONENT}}
+    state: absent    
+
+- name: Copy a file
+  ansible.builtin.copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes 
+  become_user: roboshop 
+
+
+- name: creating a package
+  ansible.builtin.shell:  mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
+  args:
+    chdir: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop 
+
+
+
+# - name: configuring nodejs component 
+#   ansible.builtin.include_role:
+#     name: common
+#     tasks_from: config-service 
+
+# - name: setting a hostname
+#   ansible.builtin.include_role:
+#     name: common
+#     tasks_from: set-hostname
