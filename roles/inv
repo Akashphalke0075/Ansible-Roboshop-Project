@@ -20,4 +20,7 @@ cart.robot.internal
 172.31.28.79
 
 [shipping]
+173.31.93.173
+
+[rabbitmq]
 172.31.83.172

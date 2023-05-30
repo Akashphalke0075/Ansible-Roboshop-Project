@@ -34,13 +34,12 @@
   become_user: roboshop 
 
 
+- name: configuring nodejs component 
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: config-service 
 
-# - name: configuring nodejs component 
-#   ansible.builtin.include_role:
-#     name: common
-#     tasks_from: config-service 
-
-# - name: setting a hostname
-#   ansible.builtin.include_role:
-#     name: common
-#     tasks_from: set-hostname
+- name: setting a hostname
+  ansible.builtin.include_role:
+    name: common
+    tasks_from: set-hostname
