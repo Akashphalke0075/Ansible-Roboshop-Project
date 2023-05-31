@@ -1,17 +1,17 @@
-- name: configure yum repo
-  ansible.builtin.shell: curl --silent --location https://rpm.nodesource.com/setup_16.x | sudo bash -
-
-- name: installing nodejs
+- name: installing python
   ansible.builtin.yum: 
-    name:
-       - nodejs
-       - gcc-c++
+    name: "{{item}}"
     state: present
+  loop:      
+       - python36
+       - gcc 
+       - python3-devel
+
 
 - name: creating user 
   ansible.builtin.include_role:
     name: common
-    tasks_from: create-user 
+    tasks_from: create-user
 
 - name: Run tasks other download and extract frontend
   ansible.builtin.include_role:
@@ -30,9 +30,24 @@
     remote_src: yes
   become_user: roboshop 
 
-- name: Install npm package
-  community.general.npm:
-    path: /home/roboshop/{{COMPONENT}}
+- name: Install pip
+  ansible.builtin.pip:
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
+    virtualenv: /my_app/venv
+    executable: pip3
+
+- name: replace uid
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^uid'
+    line: uid = {{APP_USER_INFO.uid}}
+
+- name: replace gid
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    regexp: '^gid'
+    line: gid = {{APP_USER_INFO.group}}
+
 
 - name: configuring nodejs component 
   ansible.builtin.include_role:
