@@ -23,7 +23,7 @@ cart.robot.internal
 172.31.93.20
 
 [rabbitmq]
-172.31.83.172
+172.31.85.10
 
 [payment]
 172.31.85.246
