@@ -33,7 +33,6 @@
 - name: Install pip
   ansible.builtin.pip:
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
-    virtualenv: /my_app/venv
     executable: pip3
 
 - name: replace uid
