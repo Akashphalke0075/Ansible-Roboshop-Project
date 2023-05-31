@@ -1,11 +1,11 @@
 [frontend]
 frontend.robot.internal
 
-[catalogue]
-catalogue.robot.internal
-
 [mongodb]
 mongodb.robot.internal
+
+[catalogue]
+catalogue.robot.internal
 
 [redis]
 redis.robot.internal
