@@ -17,13 +17,13 @@ user.robot.internal
 cart.robot.internal
 
 [mysql]
-172.31.28.79
+mysql.robot.internal
  
 [shipping]
-172.31.93.20
+shipping.robot.internal
 
 [rabbitmq]
-172.31.85.10
+rabbitmq.robot.internal
 
 [payment]
-172.31.96.32
+payment.robot.internal
