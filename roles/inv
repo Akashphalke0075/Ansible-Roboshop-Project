@@ -2,7 +2,7 @@
 frontend.robot.internal
 
 [mongodb]
-54.196.239.195
+172.31.27.225
 
 [catalogue]
 catalogue.robot.internal
