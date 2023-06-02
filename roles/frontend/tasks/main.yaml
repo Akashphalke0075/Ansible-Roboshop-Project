@@ -33,7 +33,7 @@
 - name: Restart service nginx
   ansible.builtin.systemd:
     name: nginx
-    state: restarted 
+    state: started 
     daemon_reload: true
     enabled: yes  
     
