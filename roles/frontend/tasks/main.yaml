@@ -30,12 +30,12 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf
     
-- name: Restart service nginx
+- name: Starting Service 
   ansible.builtin.systemd:
-    name: nginx
-    state: started 
-    daemon_reload: true
-    enabled: yes  
+    state: started
+    daemon_reload: yes
+    name: nginx 
+    enabled: yes 
     
 - name: Run tasks other download and extract mongo
   ansible.builtin.include_role:
