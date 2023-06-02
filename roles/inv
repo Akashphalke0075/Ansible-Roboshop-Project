@@ -1,5 +1,5 @@
 [frontend]
-172.31.94.117
+frontend.robot.internal
 
 [mongodb]
 172.31.92.196
