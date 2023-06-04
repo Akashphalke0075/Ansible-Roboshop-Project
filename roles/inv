@@ -10,10 +10,6 @@ catalogue.robot.internal
 [redis]
 redis.robot.internal
 
-
-[cart]
-cart.robot.internal
-
 [mysql]
 mysql.robot.internal
  
@@ -28,3 +24,6 @@ payment.robot.internal
 
 [user]
 user.robot.internal
+
+[cart]
+cart.robot.internal
