@@ -9,13 +9,7 @@ catalogue.robot.internal
 
 [redis]
 redis.robot.internal
-
-[mysql]
-mysql.robot.internal
  
-[shipping]
-shipping.robot.internal
-
 [rabbitmq]
 rabbitmq.robot.internal
 
@@ -27,3 +21,9 @@ user.robot.internal
 
 [cart]
 cart.robot.internal
+
+[mysql]
+mysql.robot.internal
+
+[shipping]
+shipping.robot.internal
