@@ -5,9 +5,9 @@
 
 - name: Install redis
   ansible.builtin.package:
-    name: redis-6.2.11
+    name: redis-6.2.7
     state: present
-
+ 
 - name: update mongodb conf
   ansible.builtin.replace:
     path: /etc/redis/redis.conf

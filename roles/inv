@@ -10,8 +10,6 @@ catalogue.robot.internal
 [redis]
 redis.robot.internal
 
-[user]
-user.robot.internal
 
 [cart]
 cart.robot.internal
@@ -27,3 +25,6 @@ rabbitmq.robot.internal
 
 [payment]
 payment.robot.internal
+
+[user]
+user.robot.internal
