@@ -13,7 +13,7 @@
 - name: starting MySQL Service
   ansible.builtin.systemd:
     name: mysqld
-    state: started
+    state: restarted
     enabled: yes
 
 - name: Get MySQL version with non-default credentials
@@ -55,7 +55,7 @@
       - name: uninstall plugin
         ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
         ignore_errors: yes
-        
+
 - name: download and extract mysql
   ansible.builtin.include_role:
     name: common
