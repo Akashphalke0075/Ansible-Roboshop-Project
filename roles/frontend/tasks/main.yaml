@@ -1,43 +1,38 @@
-- name: Install nginx
+- name: Installing Nginx
   ansible.builtin.package:
     name: nginx
     state: present
 
-# - name: dwonload and extract
-#   ansible.builtin.unarchive:
-#     src: https://github.com/stans-robot-project/frontend/archive/main.zip
-#     dest: /tmp
-#     remote_src: yes    
-
-- name: Run tasks other download and extract frontend
+- name: Download and extracting frontend 
   ansible.builtin.include_role:
     name: common
     tasks_from: download
 
-- name: Remove file 
+- name: Cleanup of Old Web Content 
   ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: absent 
+    path: /usr/share/nginx/html 
+    state: absent    # means delete
 
-- name: Copy a file
+- name: Copy frontend content to nginx path 
   ansible.builtin.copy:
-    src: /tmp/frontend-main/static/
-    dest: /usr/share/nginx/html/
-    remote_src: yes
+     src: /tmp/frontend-main/static/
+     dest: /usr/share/nginx/html/  
+     remote_src: yes  # Source is remote machine as download of the file happened on the remote server.
 
-- name: copy proxy file
-  ansible.builtin.copy:
-    src: roboshop.conf
-    dest: /etc/nginx/default.d/roboshop.conf
-    
+- name: Copying Roboshop Configuration  
+  ansible.builtin.template:
+    src: roboshop.conf 
+    dest: /etc/nginx/default.d/roboshop.conf 
+  notify: Restarting Nginx
+
 - name: Starting Service 
   ansible.builtin.systemd:
     state: started
     daemon_reload: yes
     name: nginx 
-    enabled: yes 
-    
-- name: Run tasks other download and extract mongo
+    enabled: yes
+
+- name: Doing set-hostname 
   ansible.builtin.include_role:
     name: common
     tasks_from: set-hostname
