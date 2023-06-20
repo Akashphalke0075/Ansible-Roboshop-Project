@@ -1,5 +1,5 @@
 [frontend]
-frontend.robot.internal
+172.31.92.255
 
 [mongodb]
 mongodb.robot.internal
