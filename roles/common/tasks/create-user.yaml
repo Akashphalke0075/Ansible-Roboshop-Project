@@ -1,9 +1,9 @@
-- name: Add the user roboshop
+- name: Adding Application User 
   ansible.builtin.user:
-    name: roboshop
-    comment: adding user for project roboshop
-  register: APP_USER_INFO 
+    name: roboshop 
+    comment: roboshop project application user 
+  register: APP_USER_INFO
 
-- name: printing output
-  ansible.builtin.debug:
+- name: Prinint the app user info 
+  debug:
     msg: "{{APP_USER_INFO}}"

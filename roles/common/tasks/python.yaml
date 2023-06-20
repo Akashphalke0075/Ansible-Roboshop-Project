@@ -1,59 +1,57 @@
-- name: installing python
-  ansible.builtin.yum: 
+- name: Install Python 
+  ansible.builtin.yum:
     name: "{{item}}"
-    state: present
-  loop:      
-       - python36
-       - gcc 
-       - python3-devel
+    state: present  
+  loop: 
+    - python36 
+    - gcc
+    - python3-devel 
 
-
-- name: creating user 
+- name: Creating roboshop user account 
   ansible.builtin.include_role:
     name: common
-    tasks_from: create-user
+    tasks_from: create-user 
 
-- name: Run tasks other download and extract frontend
+- name: Download and extracting frontend 
   ansible.builtin.include_role:
     name: common
-    tasks_from: download    
+    tasks_from: download 
 
-- name: Remove file (delete file)
+- name: Deleting Old Content
   ansible.builtin.file:
     path: /home/roboshop/{{COMPONENT}}
-    state: absent    
+    state: absent  
 
-- name: Copy a file
+- name: Copy file to destination 
   ansible.builtin.copy:
-    src: /tmp/{{COMPONENT}}-main/
+    src:  /tmp/{{COMPONENT}}-main/
     dest: /home/roboshop/{{COMPONENT}}/
     remote_src: yes
   become_user: roboshop 
 
-- name: Install pip
+- name: Installing dependencies
   ansible.builtin.pip:
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
-- name: replace uid
+- name: Updating the User ID 
   ansible.builtin.lineinfile:
-    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    path:  /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^uid'
     line: uid = {{APP_USER_INFO.uid}}
 
-- name: replace gid
+- name: Updating the Group ID 
   ansible.builtin.lineinfile:
-    path: /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
+    path:  /home/roboshop/{{COMPONENT}}/{{COMPONENT}}.ini
     regexp: '^gid'
     line: gid = {{APP_USER_INFO.group}}
 
-
-- name: configuring nodejs component 
+- name: Configuring the service 
   ansible.builtin.include_role:
     name: common
     tasks_from: config-service 
 
-- name: setting a hostname
+- name: Doing set-hostname 
   ansible.builtin.include_role:
     name: common
     tasks_from: set-hostname
