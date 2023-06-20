@@ -32,11 +32,11 @@
 
       - name: Coping PASSWD reset file
         ansible.builtin.copy:
-            src: root_password.sql
-            dest: /tmp/root_password.sql
+            src: root_password.mysql
+            dest: /tmp/root_password.mysql
 
       - name: reset mysql password
-        ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{DEFAULT_ROOT_PASSWORD.stdout}}" < /tmp/root_password.sql
+        ansible.builtin.shell: mysql --connect-expired-password -uroot -p"{{DEFAULT_ROOT_PASSWORD.stdout}}" < /tmp/root_password.mysql
         register: DEFAULT_ROOT_PASSWORD
 
 - name: checking password validate plugin
@@ -53,8 +53,9 @@
           dest: /tmp/password_validate.mysql
 
       - name: uninstall plugin
-        ansible.builtin.shell: mysql --connect-expired-password -uroot -pRoboShop@1 < /tmp/password_validate.mysql
-
+        ansible.builtin.shell: echo "uninstall plugin validate_password;" | mysql -uroot -pRoboShop@1
+        ignore_errors: yes
+        
 - name: download and extract mysql
   ansible.builtin.include_role:
     name: common
