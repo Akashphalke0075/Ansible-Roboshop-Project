@@ -1,0 +1,3 @@
+- name: test 
+  debug: 
+    msg: i am msg from dependencies meta
