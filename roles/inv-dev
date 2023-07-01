@@ -1,8 +1,8 @@
-[frontend]
-frontend-dev.robot.internal
-
 [mongodb]
 mongodb-dev.robot.internal
+
+[frontend]
+frontend-dev.robot.internal
 
 [catalogue]
 catalogue-dev.robot.internal
