@@ -1,5 +1,5 @@
 [frontend]
-frontend.robot.internal
+frontend-dev.robot.internal
 
 [mongodb]
 mongodb-dev.robot.internal
